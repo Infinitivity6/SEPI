@@ -53,7 +53,7 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
         self.assertIn('1: Buy flowers', [row.text for row in rows])
-        self.assertIn('2: Give a gift to Lisi', [eow.text for row in rows])
+        self.assertIn('2: Give a gift to Lisi', [row.text for row in rows])
 
         # 张三想知道这个网站是否会记住他的清单
         # 他看到网站为他生成了一个唯一的URL
