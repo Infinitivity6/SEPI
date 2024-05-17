@@ -53,4 +53,9 @@
 * 数据库迁移；
 * PPT9 完成
 
+#### 第十一次提交
+* 使用LiveServerTestCase来重构功能测试代码；
+* 新建functional_tests文件夹统一管理功能测试；
+* PPT10 第一部分完成
+
 
