@@ -3,7 +3,7 @@ from fabric.api import env,local,run
 import random
 
 
-REPO_URL = 'git@github.com:OYollie/tstd.git'#(1)
+REPO_URL = 'https://github.com/Infinitivity6/SEPI.git'#(1)
 
 
 def deploy():
@@ -26,8 +26,9 @@ def _get_latest_source(source_folder):
         run(f'cd {source_folder} && git fetch')  # (2)(3)
         run(f'cd {source_folder} && git checkout master && git pull origin master')
     else:
+        run(f'rm -rf {source_folder}')
         run(f'git clone {REPO_URL} {source_folder} ')  # (4)
-        run(f'cd {source_folder} && git chekout master')
+        run(f'cd {source_folder} && git checkout master')
     current_commit = local("git log -n 1 --format=%H", capture=True)  # 5'
     run(f'cd {source_folder} && git reset --hard {current_commit}')
 
@@ -59,8 +60,8 @@ def _update_static_files(source_folder):
 
 def _update_database(source_folder):
     run(
-        f'cd {source_folder}'
-        ' && ../virtualenv/bin/python manage.py migrate --noinput'
+        f'cd {source_folder} && ../virtualenv/bin/python manage.py makemigrations --noinput'
     )
-    if __name__ == '__name__':
-        local('fab -f /path/fabfile.py deploy')
+    run(
+        f'cd {source_folder} && ../virtualenv/bin/python manage.py migrate --noinput'
+    )
